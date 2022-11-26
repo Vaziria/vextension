@@ -4,6 +4,27 @@ import { getCookies } from "../utils/cookies";
 import { emitToServer } from "../utils/socket";
 
 
+function setupPopUpListener(port: chrome.runtime.Port){
+    console.log(`$ connected ${port.name}`)
+    port.onMessage.addListener(function(data, port){
+        console.log(data)
+    })
+}
+
+
+function setupExtensionMessageListener(){
+    console.log(`setup longlived listener`)
+
+    chrome.runtime.onConnect.addListener(function(port) {
+        if(port.name == 'popup'){
+            setupPopUpListener(port)
+        }
+    
+    })
+}
+
+
+
 function setupMessageListener(){
     chrome.runtime.onMessageExternal.addListener(async function(request: AllEvent, sender, sendResponse){
         
@@ -33,7 +54,11 @@ function setupMessageListener(){
 function setupBackground(){
     console.log(`${process.env.NODE_ENV} background setup...${extesionId}`)
 
+
+    console.log(chrome.runtime.id, "ekstensi")
+
     setupMessageListener()
+    setupExtensionMessageListener()
 }
 
 

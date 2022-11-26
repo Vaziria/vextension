@@ -1,7 +1,8 @@
 import { io } from 'socket.io-client'
+import { webSocketEndpoint } from '../config'
 import { AllEvent } from '../event'
 
-export const socket = io('ws://localhost:5000', {
+export const socket = io(webSocketEndpoint || 'ws://localhost:5000', {
   transports: ['websocket'],
   path: '/ws/socket.io'
 })
