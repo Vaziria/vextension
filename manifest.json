@@ -1,13 +1,18 @@
 {
   "manifest_version": 3,
   "name": "Vee Extension",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "masik dalam bentuk kampret",
   "background": {
     "service_worker": "src/script/background.ts",
     "type": "module"
   },
-
+  "icons": {
+    "16": "./public/icons16.png",
+    "32": "./public/icons32.png",
+    "48": "./public/icons48.png",
+    "128": "./public/icons100.png"
+  },
   "action": {
     "default_popup": "src/popup/index.html"
   },
@@ -18,7 +23,10 @@
         "js": ["src/script/content_script.ts"]
     }
   ],
-  
+  "externally_connectable": {
+    "matches": ["*://*.shopee.co.id/*"]
+  },
+
   "web_accessible_resources": [
     {
       "resources": [

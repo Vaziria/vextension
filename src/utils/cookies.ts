@@ -1,7 +1,5 @@
+import { Cookie } from "../event"
 
-export interface Cookie {
-    [key: string]: string
-}
 
 export function getCookies(){
 

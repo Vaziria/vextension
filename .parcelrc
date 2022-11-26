@@ -1,4 +1,3 @@
 {
-    "extends": ["@parcel/config-webextension"],
-    "namers": ["parcel-namer-without-hash"]
+    "extends": ["@parcel/config-webextension"]
 }

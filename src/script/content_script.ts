@@ -2,7 +2,7 @@ import { getCookies } from "../utils/cookies";
 
 function injectDom(){
     const s = document.createElement('script');
-    s.src = chrome.runtime.getURL("inject_dom.js");
+    s.src = chrome.runtime.getURL("src/script/inject_dom.js");
     (document.head || document.documentElement).appendChild(s);
 }
 

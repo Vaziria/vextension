@@ -1,4 +1,4 @@
-import { emitToServer } from "../utils/socket"
+import { sendMessage } from "../utils/message"
 
 function syncSession(init: RequestInit){
   const headers = init.headers as any
@@ -18,11 +18,12 @@ function syncSession(init: RequestInit){
   const encData = headers['af-ac-enc-dat']
   const szToken = headers['sz-token']
   
-  console.log(headers)
-
-  emitToServer('key', {
-    afAcEncDat: encData as string,
-    szToken: szToken as string
+  sendMessage({
+    event_name: 'token_event',
+    data: {
+      afAcEncDat: encData as string,
+      szToken: szToken as string
+    }
   })
 
 }
@@ -45,15 +46,6 @@ function createProxyFetch(){
 // pastikan dipanggil sekali
 function setupInject() {
   console.log('setup inject');
-  
-  chrome.runtime.sendMessage({
-    text: "asdasdasdd"
-  }, function(data){
-
-    console.log('response', data)
-  
-  })
-
   
   createProxyFetch();
 }

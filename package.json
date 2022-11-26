@@ -30,6 +30,11 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "staticFiles": {
+    "staticPath": [
+      "public"
+    ]
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -56,6 +61,7 @@
     "npm": "^9.1.2",
     "parcel": "^2.8.0",
     "parcel-namer-without-hash": "^0.0.1",
+    "parcel-reporter-static-files-copy": "^1.4.0",
     "path-browserify": "^1.0.1",
     "process": "^0.11.10"
   }
