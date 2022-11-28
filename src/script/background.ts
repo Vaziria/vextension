@@ -1,7 +1,9 @@
+import { tab } from "@testing-library/user-event/dist/tab";
 import { extesionId } from "../config";
 import { AllEvent, SessionEvent } from "../event";
 import { getCookies } from "../utils/cookies";
-import { emitToServer } from "../utils/socket";
+import { emitToServer, socket } from "../utils/socket";
+
 
 
 function setupPopUpListener(port: chrome.runtime.Port){
@@ -50,19 +52,44 @@ function setupMessageListener(){
     })
 }
 
+function setupExtensionId(): Promise<boolean> {
+    const prom = new Promise<boolean>((resolve, reject) => {
+        const sendInterval = setInterval(() => {
+            emitToServer({
+                event_name: "extension_info",
+                data: {
+                    extensionId: chrome.runtime.id
+                }
+            })
+
+        }, 1000)
+
+        const selesai = () => {
+            clearInterval(sendInterval)
+            resolve(true)
+            socket.off('ack_extension_info', selesai)
+        }
+
+        socket.on('ack_extension_info', selesai)
+
+    })
+    
+    return prom
+}
+
 
 function setupBackground(){
     console.log(`${process.env.NODE_ENV} background setup...${extesionId}`)
-
-
-    console.log(chrome.runtime.id, "ekstensi")
+    setupExtensionId().then(() => {
+        console.log('extension id setup')
+    })
+    
 
     setupMessageListener()
     setupExtensionMessageListener()
 }
 
-
-
 setupBackground();
+
 
 export {}

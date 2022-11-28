@@ -29,7 +29,7 @@
   "scripts": {
     "start": "parcel manifest.json --no-hmr",
     "build": "parcel build manifest.json",
-    "test": "react-scripts test",
+    "test": "eslint",
     "eject": "react-scripts eject"
   },
   "staticFiles": {
@@ -58,7 +58,10 @@
   "devDependencies": {
     "@parcel/config-webextension": "^2.8.0",
     "@types/chrome": "^0.0.202",
+    "@typescript-eslint/eslint-plugin": "^5.44.0",
+    "@typescript-eslint/parser": "^5.44.0",
     "buffer": "^5.7.1",
+    "eslint": "^8.28.0",
     "i": "^0.3.7",
     "npm": "^9.1.2",
     "parcel": "^2.8.0",

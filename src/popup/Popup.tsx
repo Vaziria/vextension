@@ -4,7 +4,6 @@ import { HostStatus } from '../component/HostStatus';
 import { Avatar, Button, Divider, Grid, Paper, Stack, Typography } from '@mui/material';
 import image from '../../public/icons48.png';
 
-
 function App() {
   const locked = useState(false);
 

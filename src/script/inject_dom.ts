@@ -1,4 +1,10 @@
+import { keyExtensionName } from "../config"
+import { createDomInterface } from "../dom_interface"
 import { sendMessage } from "../utils/message"
+
+function getExtensionId(): string {
+  return localStorage.getItem(keyExtensionName) || ''
+}
 
 function syncSession(init: RequestInit){
   const headers = init.headers as any
@@ -17,14 +23,19 @@ function syncSession(init: RequestInit){
 
   const encData = headers['af-ac-enc-dat']
   const szToken = headers['sz-token']
+  const extId = getExtensionId()
+
+  if(extId != ''){
+    sendMessage(extId, {
+      event_name: 'token_event',
+      data: {
+        afAcEncDat: encData as string,
+        szToken: szToken as string
+      }
+    })
+  }
   
-  sendMessage({
-    event_name: 'token_event',
-    data: {
-      afAcEncDat: encData as string,
-      szToken: szToken as string
-    }
-  })
+  
 
 }
 
@@ -43,11 +54,14 @@ function createProxyFetch(){
 }
 
 
+
+
 // pastikan dipanggil sekali
 function setupInject() {
   console.log('setup inject');
-  
-  createProxyFetch();
+
+  createProxyFetch()
+  createDomInterface()
 }
 
 

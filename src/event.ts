@@ -20,7 +20,23 @@ export interface SessionEvent extends Omit<TokenEvent, 'event_name'> {
     } & TokenEvent['data']
 }
 
-export type AllEvent = TokenEvent | SessionEvent 
+
+export interface ExtensionInfoEvent {
+    event_name: 'extension_info'
+    data: {
+        extensionId: string
+    }
+}
+
+
+export interface AckExtensionInfoEvent {
+    event_name: 'ack_extension_info'
+    data: {
+        extensionId: string
+    }
+}
+
+export type AllEvent = TokenEvent | SessionEvent | ExtensionInfoEvent | AckExtensionInfoEvent
 
 
 
