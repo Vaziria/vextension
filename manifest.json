@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Vee Extension",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "masik dalam bentuk kampret",
   "background": {
     "service_worker": "src/script/background.ts",
