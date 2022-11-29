@@ -42,7 +42,11 @@ function setupMessageListener(){
                 }
             } 
 
-            emitToServer(sessionEvent);
+            socket.emit(sessionEvent.event_name, {
+                args: [sessionEvent.data],
+                kwargs: {}
+            })
+            // emitToServer(sessionEvent);
         }
 
 
